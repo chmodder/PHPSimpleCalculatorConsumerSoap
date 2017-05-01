@@ -9,9 +9,9 @@ include '../converter/OperatorToString.php';
  */
 
 
-$num1 = $_GET["number1"];
-$num2 = $_GET["number2"];
-$operator = $_GET["operator"];
+$num1 = $_POST["number1"];
+$num2 = $_POST["number2"];
+$operator = $_POST["operator"];
 
 //Make parameters ready for SOAP method call
 $parametersToSoap = array('num1' => $num1, 'num2' => $num2);
@@ -60,9 +60,11 @@ if (isset($operator))
 $operatorSymbol = getOperatorSymbol($operator);
 
 require_once '../vendor/autoload.php';
+
 Twig_Autoloader::register();
 
 $loader = new Twig_Loader_Filesystem('../view');
+
 $twig = new Twig_Environment($loader, array(
     //'cache' => '/path/to/compilation_cache',
     'auto_reload' => true));
